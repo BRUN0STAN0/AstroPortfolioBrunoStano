@@ -1,13 +1,34 @@
+---
+import RotatingWords from "./RotatingWords.astro";
+import TimeLine from "./TimeLine.astro";
+---
+
 <div class="hero bg-base-200 min-h-[55vh]">
-    <div class="hero-content text-center">
-        <div class="max-w-md">
-            <h1 class="text-5xl font-bold">Hello there</h1>
-            <p class="py-6">
-                Provident cupiditate voluptatem et in. Quaerat fugiat ut
-                assumenda excepturi exercitationem quasi. In deleniti eaque aut
-                repudiandae et a id nisi.
-            </p>
-            <button class="btn btn-primary">Get Started</button>
+    <div class="text-center">
+        <div class="flex flex-row pb-4 gap-4">
+            <div
+                class="min-h-[78vh] basis-1/3 max-h-[78vh] overflow-y-auto bg-gray-800 dark:bg-gray-800 rounded-lg p-4"
+            >
+                <TimeLine />
+            </div>
+            <div class="basis-1/3">
+                <img
+                    src="/assets/hero.png"
+                    alt="Hero Image"
+                    class="w-full h-auto rounded-lg"
+                /> 
+            </div>
+            <div class="flex flex-center items-center justify-center basis-1/3">
+
+            <RotatingWords />
+            </div>
         </div>
+        <p class="py-6">
+            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
+            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
+            a id nisi.
+        </p>
+
+        <button class="btn btn-primary">Get Started</button>
     </div>
 </div>

@@ -1,5 +1,5 @@
 <label class="swap swap-rotate">
-  <input
+  <input id="themeIcon"
     type="checkbox"
     onchange=" document.documentElement.setAttribute('data-theme', this.checked ? 'light' : 'dark'); 
    document.getElementById('themeName').click();"
@@ -28,7 +28,8 @@
   </svg>
 </label>
 <label class="swap btn btn-ghost cursor-">
-  <input type="checkbox" id="themeName" />
+  <input type="checkbox" id="themeName" onchange=" document.documentElement.setAttribute('data-theme', this.checked ? 'light' : 'dark'); 
+   document.getElementById('themeIcon').click();"/>
   <span class="swap-on">Light</span>
   <span class="swap-off">Dark</span>
 </label>
