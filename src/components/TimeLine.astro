@@ -1,30 +1,21 @@
 ---
 import TimeExp from "./TimeExp.astro";
+import type { TimelineItem } from "../i18n/translations";
+
+interface Props {
+  items: TimelineItem[];
+}
+
+const { items } = Astro.props as Props;
 ---
 
 <ul class="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
- 
+  {items.map((item) => (
     <TimeExp
-        title="Started my journey"
-        year="2018"
-        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, eaque."
-        left="true"
+      title={item.title}
+      year={item.year}
+      description={item.description}
+      left={item.left}
     />
-    <TimeExp
-        title="Worked as a freelance developer"
-        year="2020"
-        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, eaque."
-    />
-    <TimeExp
-        title="Founded a startup"
-        year="2022"
-        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, eaque."
-        left="true"
-    />
-    <TimeExp
-        title="Shared my projects with the world"
-        year="2023"
-        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, eaque."
-    />
-
+  ))}
 </ul>

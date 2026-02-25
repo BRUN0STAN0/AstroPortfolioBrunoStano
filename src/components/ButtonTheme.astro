@@ -1,3 +1,13 @@
+---
+import type { Translations } from "../i18n/translations";
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props as Props;
+---
+
 <label class="swap swap-rotate">
   <input id="themeIcon"
     type="checkbox"
@@ -30,6 +40,6 @@
 <label class="swap btn btn-ghost cursor-">
   <input type="checkbox" id="themeName" onchange=" document.documentElement.setAttribute('data-theme', this.checked ? 'light' : 'dark'); 
    document.getElementById('themeIcon').click();"/>
-  <span class="swap-on">Light</span>
-  <span class="swap-off">Dark</span>
+  <span class="swap-on">{t.common.light}</span>
+  <span class="swap-off">{t.common.dark}</span>
 </label>

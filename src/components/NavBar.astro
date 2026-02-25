@@ -1,5 +1,26 @@
 ---
-import ButtonTheme from "./ButtonTheme.astro";
+import type { Locale, Translations } from "../i18n/translations";
+import itFlag from "../assets/flags/it.png";
+import enFlag from "../assets/flags/en.png";
+import frFlag from "../assets/flags/fr.png";
+
+interface Props {
+  lang: Locale;
+  t: Translations;
+}
+
+const { lang, t } = Astro.props as Props;
+const baseUrl = import.meta.env.BASE_URL;
+const flags = {
+  it: { src: itFlag.src, alt: "Italian flag", label: "IT" },
+  en: { src: enFlag.src, alt: "English flag", label: "EN" },
+  fr: { src: frFlag.src, alt: "French flag", label: "FR" },
+};
+const localeLinks = {
+  it: `${baseUrl}it/`,
+  en: `${baseUrl}en/`,
+  fr: `${baseUrl}fr/`,
+};
 ---
 
 <div class="navbar navbar bg-black/90 text-white
@@ -17,40 +38,66 @@ import ButtonTheme from "./ButtonTheme.astro";
       <ul
         tabindex="-1"
         class="menu menu-sm dropdown-content bg-base-content rounded-box z-1 mt-3 w-52 p-2 shadow">
-        <li><a>Item 1</a></li>
-        <li>
-          <a >Parent</a>
-          <ul class="p-2">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
-          </ul>
-        </li>
-        <li><a>Item 3</a></li>
+        <li><a href="#hero">{t.nav.hero}</a></li>
+        <li><a href="#numeri">{t.nav.numbers}</a></li>
+        <li><a href="#dotnet">{t.nav.dotnet}</a></li>
+        <li><a href="#timeline">{t.nav.journey}</a></li>
+        <li><a href="#progetti">{t.nav.projects}</a></li>
+        <li><a href="#skills">{t.nav.skills}</a></li>
+        <li><a href="#contatti">{t.nav.contacts}</a></li>
       </ul>
     </div>
-    <a class="btn btn-ghost text-xl">Test</a>
+    <a href="#hero" class="btn btn-ghost text-xl">{t.nav.brand}</a>
 
   </div>
   <div class="navbar-center hidden lg:flex">
 
     <ul class="menu menu-horizontal px-1">
-      <li><a>Item 1</a></li>
-      <li>
-        <details>
-          <summary>Parent</summary>
-          <ul class="p-2 bg-base-100 w-40 z-1">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
-          </ul>
-        </details>
-      </li>
-      <li><a>Item 3</a></li>
+      <li><a href="#hero">{t.nav.hero}</a></li>
+      <li><a href="#numeri">{t.nav.numbers}</a></li>
+      <li><a href="#dotnet">{t.nav.dotnet}</a></li>
+      <li><a href="#timeline">{t.nav.journey}</a></li>
+      <li><a href="#progetti">{t.nav.projects}</a></li>
+      <li><a href="#skills">{t.nav.skills}</a></li>
+      <li><a href="#contatti">{t.nav.contacts}</a></li>
     </ul>
 
   </div>
-  <div class="navbar-end">
-    <button class="btn bg-green-500 text-black btn-sm">
-      Download CV 
-    </button>
+  <div class="navbar-end gap-2">
+    <div class="dropdown dropdown-end">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-sm gap-2">
+        <span>{t.common.language}: {lang.toUpperCase()}</span>
+        <img src={flags[lang].src} alt={flags[lang].alt} class="inline-block w-4 h-4" />
+      </div>
+      <ul
+        tabindex="-1"
+        class="menu menu-sm dropdown-content bg-base-content rounded-box z-1 mt-3 w-36 p-2 shadow"
+      >
+        <li>
+          <a href={localeLinks.it} class="flex items-center justify-between">
+            <span>IT</span>
+            <img src={flags.it.src} alt={flags.it.alt} class="inline-block w-4 h-4 ml-2" />
+          </a>
+        </li>
+        <li>
+          <a href={localeLinks.en} class="flex items-center justify-between">
+            <span>EN</span>
+            <img src={flags.en.src} alt={flags.en.alt} class="inline-block w-4 h-4 ml-2" />
+          </a>
+        </li>
+        <li>
+          <a href={localeLinks.fr} class="flex items-center justify-between">
+            <span>FR</span>
+            <img src={flags.fr.src} alt={flags.fr.alt} class="inline-block w-4 h-4 ml-2" />
+          </a>
+        </li>
+      </ul>
+    </div>
+    <a
+      class="btn bg-green-500 text-black btn-sm"
+      href="mailto:contact@brunostano.com"
+    >
+      {t.nav.cta}
+    </a>
   </div>
 </div>

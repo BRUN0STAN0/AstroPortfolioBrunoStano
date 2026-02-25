@@ -1,16 +1,24 @@
 ---
 import "../styles/global.css";
+
+interface Props {
+	lang?: string;
+	title?: string;
+}
+
+const { lang = "it", title = "Portfolio" } = Astro.props as Props;
 ---
 
 <!doctype html>
-<html lang="it" data-theme="dark">
+
+<html lang={lang} data-theme="dark">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Portfolio</title>
+		<title>{title}</title>
 	</head>
 	<body>
 		<slot />

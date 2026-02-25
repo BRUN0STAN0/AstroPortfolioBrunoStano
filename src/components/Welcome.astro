@@ -2,25 +2,45 @@
 import Hero from "./Hero.astro";
 import NavBar from "./NavBar.astro";
 import Statistics from "./Statistics.astro";
+import DotNetSection from "./DotNetSection.astro";
+import JourneySection from "./JourneySection.astro";
+import ProjectsSection from "./ProjectsSection.astro";
+import SkillsSection from "./SkillsSection.astro";
+import ContactSection from "./ContactSection.astro";
 import ButtonTheme from "./ButtonTheme.astro";
+import type { Locale, Translations } from "../i18n/translations";
+
+interface Props {
+  lang: Locale;
+  t: Translations;
+}
+
+const { lang, t } = Astro.props as Props;
 ---
 
 <div
-  class="mockup-browser w-full p-5 bg-gradient-to-r from-gray-300 to-gray-700 rounded-none shadow-lg hover:shadow-2xl"
+  class="mockup-browser flex min-h-screen w-full items-center justify-center p-5 bg-gradient-to-r from-primary/15 via-secondary/10 to-accent/15 rounded-none shadow-lg hover:shadow-2xl"
 >
-  <div class="bg-base-200 rounded-lg">
+  <div class="bg-base-200 shadow-xs border-1 border-base-300 rounded-lg flex h-[90vh] w-full max-w-[90vw] flex-col">
     <div class="mockup-browser-toolbar">
       <div class="input text-lg font-medium min-w-[30vw] flex items-center justify-center text-center">https://brunostano.com</div>
-      <ButtonTheme />
+      <ButtonTheme t={t} />
     </div>
-    <NavBar />
-    <div class="m-4 min-h-[80vh] max-h-[80vh] overflow-y-auto">
-      <Hero />
-      <div
-        class="w-full flex items-center justify-center w-full h-full min-h-[120vh]"
-      >
-        <Statistics />
-      </div>
+    <NavBar lang={lang} t={t} />
+    <div class="m-4 flex-1 overflow-y-auto pr-2">
+      <main class="pb-8">
+        <div
+          class="mx-auto flex w-full max-w-7xl flex-col gap-40 px-3 sm:px-4 mb-50"
+        >
+          <Hero t={t} />
+          <Statistics t={t} />
+          <DotNetSection t={t} />
+          <JourneySection t={t} />
+          <ProjectsSection t={t} />
+          <SkillsSection t={t} />
+          <ContactSection t={t} />
+        </div>
+      </main>
     </div>
   </div>
 </div>
