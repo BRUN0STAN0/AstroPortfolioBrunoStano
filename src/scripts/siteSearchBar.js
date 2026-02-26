@@ -90,14 +90,31 @@ const highlightFirstMatch = (root, rawQuery) => {
   return null;
 };
 
-const shouldOpenExternalDirectly = (url) => {
-  const blockedHosts = [
-    /(^|\.)google\./i,
-    /(^|\.)accounts\.google\.com$/i,
-    /(^|\.)facebook\.com$/i,
-    /(^|\.)instagram\.com$/i,
-  ];
-  return blockedHosts.some((pattern) => pattern.test(url.hostname));
+const isEmbeddableByWhitelist = (url) => {
+  const host = url.hostname.toLowerCase();
+  const path = url.pathname;
+
+  if (host === "youtube.com" || host === "www.youtube.com" || host === "youtube-nocookie.com" || host === "www.youtube-nocookie.com") {
+    return path.startsWith("/embed/");
+  }
+
+  if (host === "player.vimeo.com") {
+    return path.startsWith("/video/");
+  }
+
+  if (host === "www.google.com") {
+    return path.startsWith("/maps/embed");
+  }
+
+  if (host === "codepen.io") {
+    return path.includes("/embed/");
+  }
+
+  if (host === "open.spotify.com") {
+    return path.startsWith("/embed/");
+  }
+
+  return false;
 };
 
 export const initSiteSearchBar = () => {
@@ -205,7 +222,7 @@ export const initSiteSearchBar = () => {
         const normalizedUrl = /^www\./i.test(rawValue) ? `https://${rawValue}` : rawValue;
         const targetUrl = new URL(normalizedUrl, window.location.origin);
         if (targetUrl.origin !== window.location.origin) {
-          if (shouldOpenExternalDirectly(targetUrl)) {
+          if (!isEmbeddableByWhitelist(targetUrl)) {
             window.open(targetUrl.href, "_blank", "noopener,noreferrer");
             return;
           }

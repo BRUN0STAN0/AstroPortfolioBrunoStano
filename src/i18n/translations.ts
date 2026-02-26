@@ -128,8 +128,8 @@ export const translations: Record<Locale, Translations> = {
     },
     common: {
       language: "Lingua",
-      light: "Light",
-      dark: "Dark",
+      light: "Modalità Chiara",
+      dark: "Modalità Scura",
     },
     nav: {
       brand: "Bruno Stano",
