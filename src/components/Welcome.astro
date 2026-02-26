@@ -29,8 +29,8 @@ const searchPlaceholderByLocale = {
   data-aos-duration="900"
 >
   <div class="bg-base-200 border-2 border-base-content/25 rounded-lg flex h-[90vh] w-full max-w-[90vw] flex-col shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] ring-1 ring-primary/20">
-    <div class="mockup-browser-toolbar gap-2">
-      <form class="flex min-w-0 flex-1 items-center" data-site-search-form>
+    <div class="mockup-browser-toolbar grid grid-cols-[1fr_minmax(0,32rem)_1fr] items-center gap-2">
+      <form class="col-start-2 flex min-w-0 w-full items-center justify-self-center" data-site-search-form>
         <input
           class="input input-bordered input-sm h-10 w-full rounded-xl border-slate-300 bg-slate-100 text-slate-700 placeholder:text-slate-500 pr-10 font-medium shadow-inner focus:border-slate-400 focus:outline-none"
           type="text"
@@ -41,7 +41,9 @@ const searchPlaceholderByLocale = {
           placeholder={searchPlaceholderByLocale[lang]}
         />
       </form>
-      <ButtonTheme t={t} />
+      <div class="col-start-3 justify-self-end">
+        <ButtonTheme t={t} />
+      </div>
     </div>
     <div class="relative z-50" data-aos="fade-down" data-aos-delay="80">
       <NavBar lang={lang} t={t} />
