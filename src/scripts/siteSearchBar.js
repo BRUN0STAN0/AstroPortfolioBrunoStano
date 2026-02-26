@@ -90,13 +90,71 @@ const highlightFirstMatch = (root, rawQuery) => {
   return null;
 };
 
+const shouldOpenExternalDirectly = (url) => {
+  const blockedHosts = [
+    /(^|\.)google\./i,
+    /(^|\.)accounts\.google\.com$/i,
+    /(^|\.)facebook\.com$/i,
+    /(^|\.)instagram\.com$/i,
+  ];
+  return blockedHosts.some((pattern) => pattern.test(url.hostname));
+};
+
 export const initSiteSearchBar = () => {
   const form = document.querySelector("[data-site-search-form]");
   const input = document.querySelector("[data-site-search-input]");
   if (!(form instanceof HTMLFormElement) || !(input instanceof HTMLInputElement)) return;
 
   const scroller = document.querySelector("[data-aos-scroll-container]");
+  const embedView = document.querySelector("[data-embed-view]");
+  const siteContent = document.querySelector("[data-site-content]");
+  const embedIframe = document.querySelector("[data-embed-iframe]");
+  const embedUrl = document.querySelector("[data-embed-url]");
+  const embedClose = document.querySelector("[data-embed-close]");
+  const embedOpenExternal = document.querySelector("[data-embed-open-external]");
+  const embedWarning = document.querySelector("[data-embed-warning]");
   let currentUrlValue = "";
+  let embedFallbackTimer = null;
+  let embedLoaded = false;
+
+  const resetEmbedState = () => {
+    embedLoaded = false;
+    if (embedFallbackTimer) {
+      window.clearTimeout(embedFallbackTimer);
+      embedFallbackTimer = null;
+    }
+    if (embedWarning instanceof HTMLElement) embedWarning.classList.add("hidden");
+  };
+
+  const hideEmbed = () => {
+    resetEmbedState();
+    if (embedView instanceof HTMLElement) embedView.classList.add("hidden");
+    if (siteContent instanceof HTMLElement) siteContent.classList.remove("hidden");
+    if (embedIframe instanceof HTMLIFrameElement) embedIframe.src = "about:blank";
+    if (embedUrl instanceof HTMLElement) embedUrl.textContent = "";
+    if (embedOpenExternal instanceof HTMLAnchorElement) embedOpenExternal.href = "#";
+  };
+
+  const showEmbed = (url) => {
+    if (!(embedView instanceof HTMLElement) || !(siteContent instanceof HTMLElement)) {
+      window.open(url, "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    resetEmbedState();
+    if (embedIframe instanceof HTMLIFrameElement) embedIframe.src = url;
+    if (embedUrl instanceof HTMLElement) embedUrl.textContent = url;
+    if (embedOpenExternal instanceof HTMLAnchorElement) embedOpenExternal.href = url;
+    siteContent.classList.add("hidden");
+    embedView.classList.remove("hidden");
+
+    embedFallbackTimer = window.setTimeout(() => {
+      if (embedLoaded) return;
+      window.open(url, "_blank", "noopener,noreferrer");
+      if (embedWarning instanceof HTMLElement) embedWarning.classList.remove("hidden");
+    }, 3000);
+  };
+
   const updateInputWithCurrentUrl = () => {
     currentUrlValue = window.location.href;
     if (document.activeElement !== input || !input.value.trim()) {
@@ -120,6 +178,23 @@ export const initSiteSearchBar = () => {
     }
   });
 
+  if (embedClose instanceof HTMLButtonElement) {
+    embedClose.addEventListener("click", () => {
+      hideEmbed();
+      updateInputWithCurrentUrl();
+    });
+  }
+
+  if (embedIframe instanceof HTMLIFrameElement) {
+    embedIframe.addEventListener("load", () => {
+      embedLoaded = true;
+      if (embedFallbackTimer) {
+        window.clearTimeout(embedFallbackTimer);
+        embedFallbackTimer = null;
+      }
+    });
+  }
+
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const rawValue = input.value.trim();
@@ -127,14 +202,20 @@ export const initSiteSearchBar = () => {
 
     if (looksLikeUrl(rawValue)) {
       try {
-        const targetUrl = new URL(rawValue, window.location.origin);
+        const normalizedUrl = /^www\./i.test(rawValue) ? `https://${rawValue}` : rawValue;
+        const targetUrl = new URL(normalizedUrl, window.location.origin);
         if (targetUrl.origin !== window.location.origin) {
-          window.location.href = targetUrl.href;
+          if (shouldOpenExternalDirectly(targetUrl)) {
+            window.open(targetUrl.href, "_blank", "noopener,noreferrer");
+            return;
+          }
+          showEmbed(targetUrl.href);
           return;
         }
 
         const samePath = targetUrl.pathname === window.location.pathname;
         if (samePath && targetUrl.hash) {
+          hideEmbed();
           if (navigateToHash(targetUrl.hash, scroller)) {
             updateInputWithCurrentUrl();
             return;
@@ -149,6 +230,7 @@ export const initSiteSearchBar = () => {
     }
 
     clearHighlights();
+    hideEmbed();
     const query = normalizeText(rawValue);
     if (!query) return;
 

@@ -47,7 +47,7 @@ const localeLinks = {
         <li><a href="#contatti">{t.nav.contacts}</a></li>
       </ul>
     </div>
-    <a href="#hero" class="btn btn-ghost text-xl">{t.nav.brand}</a>
+    <a href={localeLinks[lang]} data-astro-reload class="btn btn-ghost text-xl">{t.nav.brand}</a>
 
   </div>
   <div class="navbar-center hidden lg:flex">
