@@ -23,7 +23,7 @@ const localeLinks = {
 };
 ---
 
-<div class="navbar navbar text-white border border-base-300/40 shadow-md
+<div class="navbar navbar relative z-50 text-white border border-base-300/40 shadow-md
             bg-slate-900
             [html[data-theme=dark]_&]:text-slate-900
             [html[data-theme=dark]_&]:bg-slate-100">
@@ -37,7 +37,7 @@ const localeLinks = {
       
       <ul
         tabindex="-1"
-        class="menu menu-sm dropdown-content bg-base-content rounded-box z-1 mt-3 w-52 p-2 shadow">
+        class="menu menu-sm dropdown-content bg-base-content rounded-box z-[60] mt-3 w-52 p-2 shadow">
         <li><a href="#hero">{t.nav.hero}</a></li>
         <li><a href="#numeri">{t.nav.numbers}</a></li>
         <li><a href="#dotnet">{t.nav.dotnet}</a></li>
@@ -71,7 +71,7 @@ const localeLinks = {
       </div>
       <ul
         tabindex="-1"
-        class="menu menu-sm dropdown-content bg-base-content rounded-box z-1 mt-3 w-36 p-2 shadow"
+        class="menu menu-sm dropdown-content bg-base-content rounded-box z-[60] mt-3 w-36 p-2 shadow"
       >
         <li>
           <a href={localeLinks.it} class="flex items-center justify-between">

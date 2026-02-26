@@ -191,15 +191,23 @@ const { lang = "it", title = "Portfolio" } = Astro.props as Props;
 
 				const observeTargets = (list, root) => {
 					if (!list.length) return;
+					const visibleState = new WeakMap();
 					const observer = new IntersectionObserver(
 						(entries) => {
 							for (const entry of entries) {
 								const target = entry.target;
-								if (entry.isIntersecting) {
+								const wasVisible = visibleState.get(target) === true;
+								const ratio = entry.intersectionRatio;
+								const shouldShow = ratio >= 0.28;
+								const shouldHide = ratio <= 0.08;
+
+								if (!wasVisible && shouldShow) {
+									visibleState.set(target, true);
 									requestAnimationFrame(() => {
 										target.classList.add("aos-animate");
 									});
-								} else {
+								} else if (wasVisible && shouldHide) {
+									visibleState.set(target, false);
 									target.classList.remove("aos-animate");
 								}
 							}
@@ -207,7 +215,7 @@ const { lang = "it", title = "Portfolio" } = Astro.props as Props;
 						{
 							root,
 							rootMargin: "0px",
-							threshold: 0.2,
+							threshold: [0, 0.08, 0.28, 1],
 						},
 					);
 
