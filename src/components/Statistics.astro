@@ -11,6 +11,7 @@ const { t } = Astro.props as Props;
 <section
   id="numeri"
   class="w-full rounded-2xl bg-gradient-to-br from-primary/35 via-base-100/60 to-secondary/35 p-6 shadow-lg ring-1 ring-base-300/60 backdrop-blur-sm sm:p-8"
+  data-aos="fade-up"
 >
   <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
     <div>
@@ -27,7 +28,7 @@ const { t } = Astro.props as Props;
   </div>
 
   <div class="stats stats-vertical gap-4 sm:stats-horizontal bg-base-100/80 text-base-content">
-    <div class="stat">
+    <div class="stat" data-aos="zoom-in" data-aos-delay="120">
       <div class="stat-title">{t.statistics.first.title}</div>
       <div class="stat-value text-primary">3+</div>
       <div class="stat-desc">
@@ -35,7 +36,7 @@ const { t } = Astro.props as Props;
       </div>
     </div>
 
-    <div class="stat">
+    <div class="stat" data-aos="zoom-in" data-aos-delay="220">
       <div class="stat-title">{t.statistics.second.title}</div>
       <div class="stat-value text-secondary">1000+</div>
       <div class="stat-desc">
@@ -43,7 +44,7 @@ const { t } = Astro.props as Props;
       </div>
     </div>
 
-    <div class="stat">
+    <div class="stat" data-aos="zoom-in" data-aos-delay="320">
       <div class="stat-title">{t.statistics.third.title}</div>
       <div class="stat-value text-accent">20+</div>
       <div class="stat-desc">

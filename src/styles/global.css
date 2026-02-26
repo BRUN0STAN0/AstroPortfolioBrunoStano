@@ -2,3 +2,13 @@
 @plugin "daisyui" {
   themes: light --default, dark --prefersdark, cupcake;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+[data-aos] {
+  will-change: transform, opacity;
+  transition-duration: 850ms !important;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+}

@@ -4,12 +4,16 @@ interface Props {
   year: string;
   description: string;
   left?: boolean;
+  delay?: number;
 }
 
-const { title, year, description, left = false } = Astro.props as Props;
+const { title, year, description, left = false, delay = 120 } = Astro.props as Props;
 ---
 
-<li>
+<li
+  data-aos={left ? "fade-right" : "fade-left"}
+  data-aos-delay={String(delay)}
+>
     <div class="timeline-middle">
       <svg
         xmlns="http://www.w3.org/2000/svg"

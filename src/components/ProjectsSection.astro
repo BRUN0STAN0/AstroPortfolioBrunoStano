@@ -11,6 +11,7 @@ const { t } = Astro.props as Props;
 <section
   id="progetti"
   class="w-full rounded-2xl bg-gradient-to-br from-secondary/35 via-base-100/60 to-accent/35 p-6 shadow-lg ring-1 ring-base-300/70 backdrop-blur-sm sm:p-8"
+  data-aos="fade-up"
 >
   <header class="mb-6 space-y-2">
     <p class="text-xs font-semibold uppercase tracking-[0.35em] text-base-content/60">
@@ -25,8 +26,12 @@ const { t } = Astro.props as Props;
   </header>
 
   <div class="grid gap-5 md:grid-cols-3">
-    {t.projects.items.map((project) => (
-      <article class="flex flex-col gap-3 rounded-xl bg-base-100  p-4">
+    {t.projects.items.map((project, index) => (
+      <article
+        class="flex flex-col gap-3 rounded-xl bg-base-100 p-4 transition-transform duration-300 hover:-translate-y-1"
+        data-aos="flip-left"
+        data-aos-delay={String(120 + index * 120)}
+      >
         <h3 class="text-base font-semibold text-base-content">
           {project.title}
         </h3>

@@ -19,15 +19,19 @@ const { lang, t } = Astro.props as Props;
 ---
 
 <div
-  class="mockup-browser flex min-h-screen w-full items-center justify-center p-5 bg-gradient-to-r from-primary/15 via-secondary/10 to-accent/15 rounded-none shadow-lg hover:shadow-2xl"
+  class="mockup-browser flex min-h-screen w-full items-center justify-center p-5 rounded-none shadow-lg hover:shadow-2xl bg-gradient-to-br from-slate-950/95 via-indigo-950/90 to-cyan-950/90 [html[data-theme=dark]_&]:bg-gradient-to-br [html[data-theme=dark]_&]:from-cyan-100 [html[data-theme=dark]_&]:via-emerald-100 [html[data-theme=dark]_&]:to-yellow-100"
+  data-aos="zoom-out-up"
+  data-aos-duration="900"
 >
-  <div class="bg-base-200 shadow-xs border-1 border-base-300 rounded-lg flex h-[90vh] w-full max-w-[90vw] flex-col">
+  <div class="bg-base-200 border-2 border-base-content/25 rounded-lg flex h-[90vh] w-full max-w-[90vw] flex-col shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] ring-1 ring-primary/20">
     <div class="mockup-browser-toolbar">
       <div class="input text-lg font-medium min-w-[30vw] flex items-center justify-center text-center">https://brunostano.com</div>
       <ButtonTheme t={t} />
     </div>
-    <NavBar lang={lang} t={t} />
-    <div class="m-4 flex-1 overflow-y-auto pr-2">
+    <div data-aos="fade-down" data-aos-delay="80">
+      <NavBar lang={lang} t={t} />
+    </div>
+    <div class="m-4 flex-1 overflow-y-auto pr-2" data-aos-scroll-container>
       <main class="pb-8">
         <div
           class="mx-auto flex w-full max-w-7xl flex-col gap-40 px-3 sm:px-4 mb-50"
@@ -44,9 +48,3 @@ const { lang, t } = Astro.props as Props;
     </div>
   </div>
 </div>
-
-<style>
-  body {
-    overflow: hidden;
-  }
-</style>

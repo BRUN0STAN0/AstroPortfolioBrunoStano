@@ -12,6 +12,7 @@ const { t } = Astro.props as Props;
 <section
   id="timeline"
   class="w-full rounded-2xl bg-gradient-to-br from-accent/35 via-base-100/60 to-primary/30 p-6 shadow-lg ring-1 ring-base-300/70 backdrop-blur-sm sm:p-8"
+  data-aos="fade-up"
 >
   <header class="mb-6 space-y-2">
     <p class="text-xs font-semibold uppercase tracking-[0.35em] text-base-content/60">
@@ -25,7 +26,7 @@ const { t } = Astro.props as Props;
     </p>
   </header>
 
-  <div class="max-h-[70vh] overflow-y-auto rounded-xl bg-base-100/90 p-4 shadow-inner sm:p-5">
+  <div class="max-h-[70vh] overflow-y-auto rounded-xl bg-base-100/90 p-4 shadow-inner sm:p-5" data-aos="fade-up" data-aos-delay="160">
     <TimeLine items={t.journey.timeline} />
   </div>
 </section>

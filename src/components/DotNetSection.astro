@@ -11,9 +11,10 @@ const { t } = Astro.props as Props;
 <section
   id="dotnet"
   class="w-full rounded-2xl bg-gradient-to-br from-secondary/35 via-base-100/60 to-accent/35 p-6 shadow-lg ring-1 ring-base-300/60 backdrop-blur-sm sm:p-8"
+  data-aos="fade-up"
 >
   <div class="grid gap-8 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:items-start">
-    <div class="space-y-4">
+    <div class="space-y-4" data-aos="fade-right" data-aos-delay="120">
       <p class="text-xs font-semibold uppercase tracking-[0.35em] text-base-content/60">
         {t.dotnet.label}
       </p>
@@ -49,7 +50,7 @@ const { t } = Astro.props as Props;
       </div>
     </div>
 
-    <div class="space-y-4 rounded-2xl bg-base-100 p-4 text-sm text-base-content/85">
+    <div class="space-y-4 rounded-2xl bg-base-100 p-4 text-sm text-base-content/85" data-aos="fade-left" data-aos-delay="220">
       <h3 class="text-sm font-semibold uppercase tracking-wide text-primary">
         {t.dotnet.devopsTitle}
       </h3>

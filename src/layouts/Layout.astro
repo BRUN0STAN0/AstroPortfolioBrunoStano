@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import "aos/dist/aos.css";
 
 interface Props {
 	lang?: string;
@@ -22,6 +23,88 @@ const { lang = "it", title = "Portfolio" } = Astro.props as Props;
 	</head>
 	<body>
 		<slot />
+		<script>
+			const scroller = document.querySelector("[data-aos-scroll-container]");
+			const targets = Array.from(document.querySelectorAll("[data-aos]"));
+			if (targets.length) {
+				for (const target of targets) {
+					target.classList.add("aos-init");
+					target.classList.remove("aos-animate");
+				}
+
+				const observeTargets = (list, root) => {
+					if (!list.length) return;
+					const observer = new IntersectionObserver(
+						(entries) => {
+							for (const entry of entries) {
+								const target = entry.target;
+								if (entry.isIntersecting) {
+									requestAnimationFrame(() => {
+										target.classList.add("aos-animate");
+									});
+								} else {
+									target.classList.remove("aos-animate");
+								}
+							}
+						},
+						{
+							root,
+							rootMargin: "0px",
+							threshold: 0.2,
+						},
+					);
+
+					for (const target of list) {
+						observer.observe(target);
+					}
+				};
+
+				if (scroller instanceof Element) {
+					const insideScroller = targets.filter((target) => scroller.contains(target));
+					const outsideScroller = targets.filter((target) => !scroller.contains(target));
+					observeTargets(insideScroller, scroller);
+					observeTargets(outsideScroller, null);
+				} else {
+					observeTargets(targets, null);
+				}
+			}
+
+			if (window.matchMedia("(hover: hover)").matches) {
+				document.addEventListener(
+					"pointermove",
+					(event) => {
+						const target = event.target instanceof Element ? event.target.closest("[data-mouse-tilt]") : null;
+						if (!(target instanceof HTMLElement)) return;
+
+						const rect = target.getBoundingClientRect();
+						const x = event.clientX - rect.left;
+						const y = event.clientY - rect.top;
+						const centerX = rect.width / 2;
+						const centerY = rect.height / 2;
+						const intensity = Number(target.dataset.tiltIntensity || "10");
+						const rotateY = ((x - centerX) / centerX) * intensity;
+						const rotateX = ((centerY - y) / centerY) * intensity;
+
+						target.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+					},
+					{ passive: true },
+				);
+
+				document.addEventListener("pointerleave", (event) => {
+					const target = event.target instanceof Element ? event.target.closest("[data-mouse-tilt]") : null;
+					if (!(target instanceof HTMLElement)) return;
+					target.style.transform = "rotateX(0deg) rotateY(0deg)";
+				}, true);
+
+				document.addEventListener("pointerout", (event) => {
+					const target = event.target instanceof Element ? event.target.closest("[data-mouse-tilt]") : null;
+					if (!(target instanceof HTMLElement)) return;
+					const related = event.relatedTarget;
+					if (related instanceof Node && target.contains(related)) return;
+					target.style.transform = "rotateX(0deg) rotateY(0deg)";
+				});
+			}
+		</script>
 	</body>
 </html>
 
@@ -31,5 +114,6 @@ const { lang = "it", title = "Portfolio" } = Astro.props as Props;
 		margin: 0;
 		width: 100%;
 		height: 100%;
+		overflow: hidden;
 	}
 </style>

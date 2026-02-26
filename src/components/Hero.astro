@@ -10,12 +10,16 @@ interface Props {
 const { t } = Astro.props as Props;
 ---
 
-<section id="hero" class="hero bg-base-200/80 dark:bg-base-200/40 min-h-[70vh]">
+<section
+  id="hero"
+  class="hero bg-base-200/80 dark:bg-base-200/40 min-h-[70vh]"
+  data-aos="fade-up"
+>
   <div
     class="mx-auto flex w-full max-w-7xl flex-col gap-10 px-3 py-10 sm:px-4 lg:grid lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-center lg:gap-10 lg:py-16"
   >
     <!-- Left: intro, copy, CTA -->
-    <div class="space-y-6 text-left">
+    <div class="space-y-6 text-left" data-aos="fade-right" data-aos-delay="120">
       <p class="text-xs font-semibold uppercase tracking-[0.35em] text-base-content/60">
         {t.hero.label}
       </p>
@@ -60,7 +64,7 @@ const { t } = Astro.props as Props;
     </div>
 
     <!-- Right: foto + elementi grafici & animazioni -->
-    <div class="relative flex items-center justify-center">
+    <div class="relative flex items-center justify-center" data-aos="zoom-in" data-aos-delay="180">
       <!-- Blob sfocato di sfondo -->
       <div
         class="pointer-events-none absolute inset-0 -z-10 mx-auto max-w-sm rounded-full bg-gradient-to-tr from-primary/75 via-secondary/65 to-accent/75 opacity-80 blur-3xl"
@@ -68,6 +72,8 @@ const { t } = Astro.props as Props;
 
       <div class="grid w-full max-w-md gap-4">
         <div
+          data-aos="fade-left"
+          data-aos-delay="240"
           class="flex items-center gap-4 rounded-2xl bg-base-100/95 p-4 shadow-xl ring-1 ring-base-300/70"
         >
           <div class="relative h-16 w-16 shrink-0">
@@ -94,6 +100,8 @@ const { t } = Astro.props as Props;
         </div>
 
         <div
+          data-aos="fade-left"
+          data-aos-delay="320"
           class="group rounded-2xl bg-base-100/95 p-4 shadow-xl ring-1 ring-base-300/70 transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl"
         >
           <p class="text-xs font-semibold uppercase tracking-[0.25em] text-primary">
@@ -118,7 +126,7 @@ const { t } = Astro.props as Props;
           </div>
         </div>
 
-        <div class="flex gap-4">
+        <div class="flex gap-4" data-aos="fade-up" data-aos-delay="400">
           <div
             class="flex-1 rounded-2xl bg-base-100/95 p-4 shadow-lg ring-1 ring-base-300/70 animate-pulse"
           >
@@ -133,14 +141,18 @@ const { t } = Astro.props as Props;
             </p>
           </div>
 
-          <div
-            class="flex w-20 flex-col items-center justify-center gap-2 rounded-2xl bg-base-100/90 p-3 text-center shadow-lg ring-1 ring-base-300/70"
-          >
-            <span class="text-[10px] font-semibold uppercase tracking-wide text-base-content/70">
-              {t.hero.experienceLabel}
-            </span>
-            <span class="text-xl font-bold text-primary">3+</span>
-            <span class="text-[10px] text-base-content/60">{t.hero.yearsLabel}</span>
+          <div class="w-20 [perspective:900px]">
+            <div
+              data-mouse-tilt
+              data-tilt-intensity="10"
+              class="flex w-20 flex-col items-center justify-center gap-2 rounded-2xl bg-base-100/90 p-3 text-center shadow-lg ring-1 ring-base-300/70 transition-transform duration-200 ease-out [transform-style:preserve-3d]"
+            >
+              <span class="text-[10px] font-semibold uppercase tracking-wide text-base-content/70">
+                {t.hero.experienceLabel}
+              </span>
+              <span class="text-xl font-bold text-primary">3+</span>
+              <span class="text-[10px] text-base-content/60">{t.hero.yearsLabel}</span>
+            </div>
           </div>
         </div>
       </div>

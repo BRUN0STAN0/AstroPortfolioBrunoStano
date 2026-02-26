@@ -10,12 +10,13 @@ const { items } = Astro.props as Props;
 ---
 
 <ul class="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
-  {items.map((item) => (
+  {items.map((item, index) => (
     <TimeExp
       title={item.title}
       year={item.year}
       description={item.description}
       left={item.left}
+      delay={120 + index * 110}
     />
   ))}
 </ul>

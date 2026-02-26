@@ -11,6 +11,7 @@ const { t } = Astro.props as Props;
 <section
   id="skills"
   class="w-full rounded-2xl bg-gradient-to-br from-success/35 via-base-100/60 to-primary/30 p-6 shadow-lg ring-1 ring-base-300/70 backdrop-blur-sm sm:p-8"
+  data-aos="fade-up"
 >
   <header class="mb-6 space-y-2">
     <p class="text-xs font-semibold uppercase tracking-[0.35em] text-base-content/60">
@@ -25,7 +26,7 @@ const { t } = Astro.props as Props;
   </header>
 
   <div class="grid gap-5 md:grid-cols-3">
-    <div class="space-y-2 rounded-xl bg-base-100  p-4">
+    <div class="space-y-2 rounded-xl bg-base-100 p-4" data-aos="fade-right" data-aos-delay="140">
       <h3 class="text-sm font-semibold uppercase tracking-wide text-primary">
         {t.skills.softTitle}
       </h3>
@@ -36,7 +37,7 @@ const { t } = Astro.props as Props;
       </ul>
     </div>
 
-    <div class="space-y-2 rounded-xl bg-base-100  p-4">
+    <div class="space-y-2 rounded-xl bg-base-100 p-4" data-aos="fade-up" data-aos-delay="220">
       <h3 class="text-sm font-semibold uppercase tracking-wide text-primary">
         {t.skills.languagesTitle}
       </h3>
@@ -47,7 +48,7 @@ const { t } = Astro.props as Props;
       </ul>
     </div>
 
-    <div class="space-y-2 rounded-xl bg-base-100  p-4">
+    <div class="space-y-2 rounded-xl bg-base-100 p-4" data-aos="fade-left" data-aos-delay="300">
       <h3 class="text-sm font-semibold uppercase tracking-wide text-primary">
         {t.skills.workModeTitle}
       </h3>
