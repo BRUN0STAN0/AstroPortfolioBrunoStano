@@ -1,46 +1,72 @@
-# Astro Starter Kit: Basics
+# Bruno Stano Portfolio (Astro)
 
-```sh
-npm create astro@latest -- --template basics
+Portfolio personale sviluppato con Astro, Tailwind CSS e DaisyUI, con supporto multilingua (`it`, `en`, `fr`), animazioni AOS, tema light/dark e pubblicazione su GitHub Pages.
+
+## Stack
+
+- Astro 5
+- Tailwind CSS 4
+- DaisyUI
+- AOS (scroll animations)
+
+## Funzionalita principali
+
+- Layout a sezioni: Hero, Numeri, .NET, Journey, Progetti, Skills, Contatti
+- Navbar responsive con switch lingua
+- Toggle tema light/dark
+- Search bar con:
+  - ricerca testuale interna con highlight e scroll al match
+  - gestione URL interni/esterni
+  - whitelist per siti embeddabili in iframe
+- Background canvas animato
+
+## Avvio locale
+
+```bash
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Dev server: `http://localhost:4321`
 
-## 🚀 Project Structure
+## Build produzione
 
-Inside of your Astro project, you'll see the following folders and files:
+```bash
+npm run build
+npm run preview
+```
+
+Output statico in `dist/`.
+
+## Deploy
+
+Il progetto e configurato per `https://brunostano.com` in `astro.config.mjs`.
+
+Deploy GitHub Pages attuale:
+- build del progetto (`npm run build`)
+- push forzato del contenuto `dist/` sul branch `gh-pages`
+
+## Struttura progetto
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+tender-tower/
+|- public/
+|- src/
+|  |- assets/
+|  |- components/
+|  |- i18n/
+|  |- layouts/
+|  |- pages/
+|  |- scripts/
+|  `- styles/
+|- astro.config.mjs
+|- package.json
+`- README.md
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Script disponibili
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- `npm run dev` - avvio ambiente di sviluppo
+- `npm run build` - build produzione
+- `npm run preview` - preview locale della build
+- `npm run astro` - comandi CLI Astro
