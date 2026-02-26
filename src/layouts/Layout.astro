@@ -30,10 +30,12 @@ const { lang = "it", title = "Portfolio" } = Astro.props as Props;
 			import { initNetworkBackground } from "../scripts/networkBackground.js";
 			import { initAosObservers } from "../scripts/aosObserver.js";
 			import { initMouseTilt } from "../scripts/mouseTilt.js";
+			import { initSiteSearchBar } from "../scripts/siteSearchBar.js";
 
 			initNetworkBackground();
 			initAosObservers();
 			initMouseTilt();
+			initSiteSearchBar();
 		</script>
 	</body>
 </html>
